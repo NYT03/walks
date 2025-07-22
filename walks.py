@@ -1,10 +1,11 @@
-import streamlit as st
+import datetime
 import json
 import os
 from typing import List
-import requests
+
 import pandas as pd
-import datetime
+import requests
+import streamlit as st
 
 # --- CONFIG ---
 ROUTE_FILE = "route.json"
@@ -330,7 +331,7 @@ if user_type == "Host (Admin)":
                             save_previous_locations(prevs)
                     save_current_location(stop)
                     st.session_state["current_location"] = stop
-                    st.experimental_rerun()
+                    st.rerun()
 else:
     st.sidebar.markdown(f"**Current Location:**\n\n<span class='current-location'>{current_location or 'Not set'}</span>", unsafe_allow_html=True)
     st.sidebar.markdown("**Previous Locations:**", unsafe_allow_html=True)
@@ -424,6 +425,6 @@ if user_type == "Host (Admin)" and st.session_state.get("is_admin"):
         if st.button("Start Walk 🏁"):
             now = datetime.datetime.now().isoformat()
             save_start_time(now)
-            st.experimental_rerun()
+            st.rerun()
 
 st.caption("Made with ❤️ of Team Neev India")
